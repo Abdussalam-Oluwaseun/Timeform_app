@@ -1,0 +1,19 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Sales by gender",
+  "width": "container",
+  "height": "container",
+  "mark": { "type": "arc" },
+  "encoding": {
+    "theta": { "field": "Revenue", "type": "quantitative" },
+    "color": {
+      "field": "productsgender",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Men", "Women"],
+        "range": ["#4A5494", "#FF655C"]
+      },
+      "legend": { "title": "Gender" }
+    }
+  }
+}

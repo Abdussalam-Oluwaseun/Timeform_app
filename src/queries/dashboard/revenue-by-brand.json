@@ -1,0 +1,21 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Revenue by brand",
+  "width": "container",
+  "height": "container",
+  "encoding": {
+    "y": { "field": "productsbrand", "type": "nominal", "sort": "-x", "axis": { "title": null } },
+    "x": { "field": "Revenue", "type": "quantitative", "axis": { "title": null } }
+  },
+  "layer": [
+    {
+      "mark": { "type": "bar" }
+    },
+    {
+      "mark": { "type": "text", "style": "labelHorizontal" },
+      "encoding": {
+        "text": { "field": "Revenue", "type": "quantitative" }
+      }
+    }
+  ]
+}

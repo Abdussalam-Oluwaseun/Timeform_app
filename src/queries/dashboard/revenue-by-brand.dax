@@ -1,0 +1,9 @@
+// Revenue, units and orders grouped by watch brand.
+EVALUATE
+SUMMARIZECOLUMNS(
+    products[brand],
+    "Revenue", SUM(sales[totalamount]),
+    "Units", SUM(sales[quantity]),
+    "Orders", COUNTROWS(sales)
+)
+ORDER BY [Revenue] DESC

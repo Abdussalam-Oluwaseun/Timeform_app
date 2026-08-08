@@ -1,0 +1,12 @@
+// Monthly revenue, units and orders for a single product.
+// The factory replaces __PRODUCT_ID__ with the numeric productid to filter.
+EVALUATE
+SUMMARIZECOLUMNS(
+    sales[monthnumber],
+    sales[month],
+    FILTER(products, products[productid] = __PRODUCT_ID__),
+    "Revenue", SUM(sales[totalamount]),
+    "Units", SUM(sales[quantity]),
+    "Orders", COUNTROWS(sales)
+)
+ORDER BY sales[monthnumber]

@@ -1,0 +1,10 @@
+// Monthly revenue, units and orders across the whole catalog (Jan–Jun 2024).
+EVALUATE
+SUMMARIZECOLUMNS(
+    sales[monthnumber],
+    sales[month],
+    "Revenue", SUM(sales[totalamount]),
+    "Units", SUM(sales[quantity]),
+    "Orders", COUNTROWS(sales)
+)
+ORDER BY sales[monthnumber]

@@ -1,0 +1,8 @@
+// Revenue, units and orders split by collection gender (Men / Women).
+EVALUATE
+SUMMARIZECOLUMNS(
+    products[gender],
+    "Revenue", SUM(sales[totalamount]),
+    "Units", SUM(sales[quantity]),
+    "Orders", COUNTROWS(sales)
+)

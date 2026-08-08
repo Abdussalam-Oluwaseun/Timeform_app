@@ -1,0 +1,20 @@
+import type { VisualizationSpec } from "@microsoft/fabric-visuals";
+import type { ColumnMetadataMap } from "@/lib/to-data-table";
+import baseQuery from "./gender-split.dax?raw";
+import baseSpec from "./gender-split.json";
+
+const connection = "timeformSM";
+
+/** Column metadata keyed by the exact DAX query output column names. */
+export const columnMetadata: ColumnMetadataMap = {
+  "products[gender]": { name: "productsgender", displayName: "Gender" },
+  "[Revenue]": { name: "Revenue", displayName: "Revenue", format: "$#,0.00" },
+  "[Units]": { name: "Units", displayName: "Units Sold", format: "#,0" },
+  "[Orders]": { name: "Orders", displayName: "Orders", format: "#,0" },
+};
+
+/** Horizontal bar chart of revenue split by collection gender. */
+export function genderSplit() {
+  const vegaLiteSpec = baseSpec as VisualizationSpec;
+  return { connection, query: baseQuery, columnMetadata, vegaLiteSpec };
+}

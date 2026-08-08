@@ -1,0 +1,11 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Monthly revenue trend for a selected product",
+  "width": "container",
+  "height": "container",
+  "mark": { "type": "line" },
+  "encoding": {
+    "x": { "field": "salesmonth", "type": "nominal", "sort": null, "axis": { "title": null } },
+    "y": { "field": "Revenue", "type": "quantitative", "axis": { "title": null } }
+  }
+}

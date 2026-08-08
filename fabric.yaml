@@ -1,0 +1,7 @@
+activeProfile: default
+profiles:
+  default:
+    semanticModels:
+      timeformSM:
+        workspaceId: 2e4aca78-9ec6-44b2-aa2d-cd8d17d1e79b
+        itemId: d32a96b2-859d-408f-932c-e4c9a448b906

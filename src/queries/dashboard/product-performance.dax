@@ -1,0 +1,14 @@
+// Per-product sales performance for the dashboard grid.
+EVALUATE
+SUMMARIZECOLUMNS(
+    products[productid],
+    products[productname],
+    products[brand],
+    products[gender],
+    products[price],
+    products[url],
+    "Units", SUM(sales[quantity]),
+    "Revenue", SUM(sales[totalamount]),
+    "Orders", COUNTROWS(sales)
+)
+ORDER BY [Revenue] DESC

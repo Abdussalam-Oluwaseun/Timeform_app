@@ -1,0 +1,15 @@
+// Full watch catalog with per-product sales measures for the collection views.
+EVALUATE
+SUMMARIZECOLUMNS(
+    products[productid],
+    products[brand],
+    products[gender],
+    products[productname],
+    products[description],
+    products[price],
+    products[url],
+    "Units", SUM(sales[quantity]),
+    "Revenue", SUM(sales[totalamount]),
+    "Orders", COUNTROWS(sales)
+)
+ORDER BY products[productid]
