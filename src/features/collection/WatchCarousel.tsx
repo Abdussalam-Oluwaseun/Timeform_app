@@ -72,9 +72,9 @@ export function WatchCarousel({ products, onAnalyze, onSelectionChange }: WatchC
   }
 
   return (
-    <div className="flex items-center justify-center gap-[40px] px-[48px] py-[8px]">
+    <div className="flex items-end justify-center gap-[32px] px-[48px] py-[8px]">
       {/* Left surrounding watches */}
-      <div className="flex items-center gap-[36px]">
+      <div className="flex items-end gap-[24px] pb-[24px]">
         <AnimatePresence mode="popLayout">
           {leftProducts.map(({ product, originalIndex }) => (
             <motion.div
@@ -100,7 +100,7 @@ export function WatchCarousel({ products, onAnalyze, onSelectionChange }: WatchC
       </AnimatePresence>
 
       {/* Right surrounding watches */}
-      <div className="flex items-center gap-[36px]">
+      <div className="flex items-end gap-[24px] pb-[24px]">
         <AnimatePresence mode="popLayout">
           {rightProducts.map(({ product, originalIndex }) => (
             <motion.div

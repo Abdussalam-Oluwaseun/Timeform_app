@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useSemanticModelQuery } from "@/hooks/use-semantic-model-query";
 import { productMonthlyTrend } from "@/queries/catalog/product-monthly-trend";
 import { ProductPanel } from "./ProductPanel";
-import { AnalyticsHeader } from "./AnalyticsHeader";
+
 import { KPISummary, type ProductKpis } from "./KPISummary";
 import { WatchSpecifications } from "./WatchSpecifications";
 import { MonthlyTrendChart } from "@/components/MonthlyTrendChart";
@@ -57,13 +57,12 @@ export function WatchAnalyticsPage({ product }: WatchAnalyticsPageProps) {
       <ProductPanel product={product} />
 
       {/* Right: analytics content */}
-      <div className="flex-1 flex flex-col px-[48px] pt-[32px] pb-[24px] overflow-auto">
-        <AnalyticsHeader product={product} />
+      <div className="flex-1 flex flex-col gap-[20px] px-[48px] pt-[150px] pb-[40px] min-h-0 overflow-y-auto">
 
         {isLoading ? (
-          <LoadingSkeleton height={96} className="mb-[24px]" />
+          <LoadingSkeleton height={96} />
         ) : queryError ? (
-          <ErrorBanner className="mb-[24px]" message={queryError} />
+          <ErrorBanner message={queryError} />
         ) : kpis ? (
           <KPISummary kpis={kpis} />
         ) : null}
@@ -72,6 +71,7 @@ export function WatchAnalyticsPage({ product }: WatchAnalyticsPageProps) {
           title="REVENUE OVERTIME"
           subtitle={`${product.brand} · ${product.name} · Jan — Jun 2024`}
           productId={product.productId}
+          chartHeight={220}
         />
 
         <WatchSpecifications product={product} />

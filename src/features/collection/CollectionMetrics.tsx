@@ -28,12 +28,12 @@ function MetricItem({ value, label }: { value: string; label: string }) {
   return (
     <div className="flex items-baseline gap-[10px]">
       <span
-        className="text-[length:var(--text-hero-700)] font-bold text-foreground"
+        className="text-[length:var(--text-hero-700)] font-semibold text-foreground"
         style={{ fontFamily: "var(--font-numeric)" }}
       >
         {value}
       </span>
-      <span className="text-[length:var(--text-100)] font-medium uppercase tracking-[0.12em] text-muted-foreground">
+      <span className="text-[length:var(--text-100)] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
         {label}
       </span>
     </div>

@@ -85,7 +85,7 @@ function KpiCard({ label, value }: Kpi) {
 
   return (
     <div className="bg-card border border-border rounded-xl px-[24px] py-[20px] flex flex-col justify-center">
-      <span className="text-[length:var(--text-100)] font-medium uppercase tracking-[0.1em] text-muted-foreground mb-[8px]">
+      <span className="text-[length:var(--text-100)] font-semibold uppercase tracking-[0.1em] text-muted-foreground mb-[8px]">
         {label}
       </span>
       <span

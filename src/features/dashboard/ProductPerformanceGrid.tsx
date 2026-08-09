@@ -29,7 +29,7 @@ const GRID_COLUMNS: GridColumnDef[] = [
     minWidth: 240,
     cellRenderer: (value, row) => (
       <div className="flex flex-col leading-tight">
-        <span className="font-medium text-foreground">{String(value ?? "")}</span>
+        <span className="font-semibold text-foreground">{String(value ?? "")}</span>
         <span className="text-200 text-muted-foreground">{String(row["productsbrand"] ?? "")}</span>
       </div>
     ),

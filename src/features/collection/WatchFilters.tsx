@@ -24,7 +24,7 @@ export function WatchFilters({ activeFilter, onFilterChange }: WatchFiltersProps
           key={filter.id}
           onClick={() => onFilterChange(filter.id)}
           className={cn(
-            "px-[20px] py-[8px] rounded-full text-[length:var(--text-200)] font-medium",
+            "px-[20px] py-[8px] rounded-full text-[length:var(--text-200)] font-semibold",
             "transition-all duration-250 cursor-pointer border-none",
             activeFilter === filter.id
               ? "bg-foreground text-background"

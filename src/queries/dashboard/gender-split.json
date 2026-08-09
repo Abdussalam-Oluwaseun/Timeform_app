@@ -11,7 +11,7 @@
       "type": "nominal",
       "scale": {
         "domain": ["Men", "Women"],
-        "range": ["#4A5494", "#FF655C"]
+        "range": ["var(--color-brand)", "var(--color-accent)"]
       },
       "legend": { "title": "Gender" }
     }

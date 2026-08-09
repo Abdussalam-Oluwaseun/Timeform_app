@@ -55,10 +55,9 @@ export function withTrendMeasure(
   spec.description = `Monthly ${meta.displayName.toLowerCase()} trend`;
 
   if (measure === "Units") {
-    // Column chart: bars + value labels (shared x/y encoding inherited).
-    delete spec.mark;
+    // Column chart: bars + value labels.
     spec.layer = [
-      { mark: { type: "bar" } },
+      { mark: { type: "bar", color: "var(--color-brand)" } },
       {
         mark: { type: "text", style: "labelVertical" },
         encoding: {
@@ -67,9 +66,21 @@ export function withTrendMeasure(
       },
     ];
   } else {
-    // Smooth line chart.
-    spec.mark = { type: "line", interpolate: "monotone" };
+    // Smooth line chart with point markers and data labels.
+    spec.layer = [
+      { mark: { type: "line", interpolate: "monotone", color: "var(--color-brand-foreground)" } },
+      { mark: { type: "point", color: "var(--color-brand-foreground)", filled: true, size: 40 } },
+      {
+        mark: { type: "text", style: "labelVertical" },
+        encoding: {
+          text: { field: meta.field, type: "quantitative" },
+        },
+      },
+    ];
   }
+
+  // Remove top-level mark if present (base spec is layered).
+  delete spec.mark;
 
   return spec;
 }

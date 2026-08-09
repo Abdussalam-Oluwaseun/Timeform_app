@@ -12,10 +12,13 @@ import { CogentBrand } from "@/components/CogentBrand";
  * revenue by brand → product performance grid.
  * The wrapper is constrained to a max width so charts stay proportional
  * on wide monitors.
+ *
+ * `overflow-anchor: none` prevents the browser's scroll-anchoring algorithm
+ * from jumping to the bottom as async content (charts, grids) loads in.
  */
 export function SalesDashboardPage() {
   return (
-    <div className="relative h-full overflow-auto">
+    <div className="relative h-full overflow-auto" style={{ overflowAnchor: "none" }}>
       <div className="max-w-[1400px] mx-auto px-[48px] pt-[32px] pb-[64px]">
         {/* Page heading */}
         <div className="mb-[24px]">

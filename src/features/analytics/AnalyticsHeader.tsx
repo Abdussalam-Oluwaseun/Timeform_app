@@ -9,7 +9,7 @@ interface AnalyticsHeaderProps {
  */
 export function AnalyticsHeader({ product }: AnalyticsHeaderProps) {
   return (
-    <div className="mb-[24px]">
+    <div>
       <h1 className="text-[length:34px] font-semibold leading-[42px] text-foreground m-0">
         Analyze the Watch
       </h1>

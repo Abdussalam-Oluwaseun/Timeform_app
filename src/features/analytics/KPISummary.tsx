@@ -19,7 +19,7 @@ interface KPISummaryProps {
  */
 export function KPISummary({ kpis }: KPISummaryProps) {
   return (
-    <div className="grid grid-cols-2 xl:grid-cols-4 gap-[20px] mb-[28px]">
+    <div className="grid grid-cols-2 xl:grid-cols-4 gap-[20px]">
       <KpiItem label="Units Sold" value={String(kpis.units)} />
       <KpiItem label="Revenue" value={formatCurrency(kpis.revenue)} />
       <KpiItem label="Orders" value={String(kpis.orders)} />

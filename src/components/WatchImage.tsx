@@ -36,7 +36,7 @@ export function WatchImage({ src, alt, className, variant = "default" }: WatchIm
           className="w-full h-full object-contain"
         />
       ) : (
-        <span className="px-[12px] text-center text-[length:var(--text-100)] font-medium uppercase tracking-[0.12em]">
+        <span className="px-[12px] text-center text-[length:var(--text-100)] font-semibold uppercase tracking-[0.12em]">
           {alt}
         </span>
       )}

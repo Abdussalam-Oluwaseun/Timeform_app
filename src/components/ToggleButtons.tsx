@@ -29,7 +29,7 @@ export function ToggleButtons({ labels, activeIndex, onChange, className }: Togg
             aria-selected={active}
             onClick={() => onChange(index)}
             className={cn(
-              "px-[16px] py-[6px] text-[length:var(--text-100)] font-medium border-none cursor-pointer transition-all duration-200",
+              "px-[16px] py-[6px] text-[length:var(--text-100)] font-semibold border-none cursor-pointer transition-all duration-200",
               active
                 ? "bg-accent text-accent-foreground"
                 : "bg-transparent text-muted-foreground hover:text-foreground",

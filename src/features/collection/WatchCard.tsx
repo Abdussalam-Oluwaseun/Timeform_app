@@ -24,7 +24,7 @@ export function WatchCard({ product, onClick }: WatchCardProps) {
       <WatchImage
         src={product.url}
         alt={product.name}
-        className="w-[140px] h-[168px] mb-[16px]"
+        className="w-[120px] h-[140px] mb-[10px]"
       />
       <span className="text-[length:11px] font-semibold text-foreground">
         {product.brand} {product.name.replace(`${product.brand} `, "")}

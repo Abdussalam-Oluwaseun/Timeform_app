@@ -3,9 +3,22 @@
   "description": "Monthly revenue trend for a selected product",
   "width": "container",
   "height": "container",
-  "mark": { "type": "line" },
   "encoding": {
     "x": { "field": "salesmonth", "type": "nominal", "sort": null, "axis": { "title": null } },
     "y": { "field": "Revenue", "type": "quantitative", "axis": { "title": null } }
-  }
+  },
+  "layer": [
+    {
+      "mark": { "type": "line", "color": "var(--color-brand-foreground)" }
+    },
+    {
+      "mark": { "type": "point", "color": "var(--color-brand-foreground)", "filled": true, "size": 40 }
+    },
+    {
+      "mark": { "type": "text", "style": "labelVertical" },
+      "encoding": {
+        "text": { "field": "Revenue", "type": "quantitative" }
+      }
+    }
+  ]
 }

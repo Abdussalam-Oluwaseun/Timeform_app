@@ -61,7 +61,7 @@ export function Navigation({ activeView, onNavigate, variant = "default" }: Navi
                 key={item.id}
                 onClick={() => onNavigate(item.id)}
                 className={cn(
-                  "text-[length:var(--text-200)] font-medium tracking-[0.04em] transition-colors duration-200 cursor-pointer bg-transparent border-none p-0",
+                  "text-[length:var(--text-200)] font-semibold tracking-[0.04em] transition-colors duration-200 cursor-pointer bg-transparent border-none p-0",
                   active
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground",

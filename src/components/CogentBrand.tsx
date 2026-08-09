@@ -5,11 +5,11 @@
  */
 export function CogentBrand() {
   return (
-    <div className="absolute bottom-[20px] right-[32px] select-none pointer-events-none">
+    <div className="fixed bottom-[20px] right-[32px] select-none pointer-events-none z-20">
       <span className="text-[length:var(--text-200)] font-semibold tracking-[0.06em] text-muted-foreground">
         COGENT{" "}
       </span>
-      <span className="text-[length:var(--text-200)] font-bold tracking-[0.06em] text-accent">
+      <span className="text-[length:var(--text-200)] font-semibold tracking-[0.06em] text-accent">
         bi
       </span>
     </div>

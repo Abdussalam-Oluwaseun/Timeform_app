@@ -9,7 +9,7 @@
   },
   "layer": [
     {
-      "mark": { "type": "bar" }
+      "mark": { "type": "bar", "color": "var(--color-brand)" }
     },
     {
       "mark": { "type": "text", "style": "labelHorizontal" },
