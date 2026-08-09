@@ -1,5 +1,7 @@
 import type { VisualizationSpec } from "@microsoft/fabric-visuals";
 import type { ColumnMetadataMap } from "@/lib/to-data-table";
+import type { CrossFilterParams } from "@/lib/cross-filter";
+import { applyCrossFilterToQuery } from "@/lib/cross-filter";
 import baseQuery from "./gender-split.dax?raw";
 import baseSpec from "./gender-split.json";
 
@@ -13,8 +15,14 @@ export const columnMetadata: ColumnMetadataMap = {
   "[Orders]": { name: "Orders", displayName: "Orders", format: "#,0" },
 };
 
+export interface GenderSplitParams {
+  /** Active cross-filter selection from the dashboard page. */
+  crossFilter?: CrossFilterParams | null;
+}
+
 /** Horizontal bar chart of revenue split by collection gender. */
-export function genderSplit() {
+export function genderSplit(params?: GenderSplitParams) {
+  const query = applyCrossFilterToQuery(baseQuery, params?.crossFilter ?? null);
   const vegaLiteSpec = baseSpec as VisualizationSpec;
-  return { connection, query: baseQuery, columnMetadata, vegaLiteSpec };
+  return { connection, query, columnMetadata, vegaLiteSpec };
 }

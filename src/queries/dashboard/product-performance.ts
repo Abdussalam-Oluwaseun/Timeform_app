@@ -1,4 +1,6 @@
 import type { ColumnMetadataMap } from "@/lib/to-data-table";
+import type { CrossFilterParams } from "@/lib/cross-filter";
+import { applyCrossFilterToQuery } from "@/lib/cross-filter";
 import baseQuery from "./product-performance.dax?raw";
 
 const connection = "timeformSM";
@@ -16,7 +18,13 @@ export const columnMetadata: ColumnMetadataMap = {
   "[Orders]": { name: "Orders", displayName: "Orders", format: "#,0" },
 };
 
+export interface ProductPerformanceParams {
+  /** Active cross-filter selection from the dashboard page. */
+  crossFilter?: CrossFilterParams | null;
+}
+
 /** Per-product sales performance table for the dashboard DataGrid. */
-export function productPerformance() {
-  return { connection, query: baseQuery, columnMetadata };
+export function productPerformance(params?: ProductPerformanceParams) {
+  const query = applyCrossFilterToQuery(baseQuery, params?.crossFilter ?? null);
+  return { connection, query, columnMetadata };
 }

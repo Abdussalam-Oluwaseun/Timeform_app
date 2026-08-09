@@ -1,7 +1,9 @@
+import type { InteractionEvent } from "@microsoft/fabric-visuals-core";
 import { DataGrid, ImageCell, type GridColumnDef } from "@microsoft/fabric-datagrid";
 import { useCssTheme } from "@microsoft/fabric-visuals";
 import { useSemanticModelQuery } from "@/hooks/use-semantic-model-query";
 import { toDataTable } from "@/lib/to-data-table";
+import type { CrossFilterParams } from "@/lib/cross-filter";
 import { productPerformance } from "@/queries/dashboard/product-performance";
 import { Card } from "@/components/Card";
 import { ErrorBanner, EmptyState, LoadingSkeleton } from "@/components/Feedback";
@@ -65,14 +67,21 @@ const GRID_COLUMNS: GridColumnDef[] = [
   },
 ];
 
+interface ProductPerformanceGridProps {
+  /** Active cross-filter selection from the dashboard page. */
+  crossFilter?: CrossFilterParams | null;
+  /** Called when the user clicks a row or clears the selection. */
+  onInteraction?: (events: InteractionEvent[]) => void;
+}
+
 /**
  * Full-width data grid of per-product sales performance.
  *
  * The direct parent applies overflow-auto so the grid stays scrollable.
  */
-export function ProductPerformanceGrid() {
+export function ProductPerformanceGrid({ crossFilter, onInteraction }: ProductPerformanceGridProps) {
   const theme = useCssTheme();
-  const { connection, query, columnMetadata } = productPerformance();
+  const { connection, query, columnMetadata } = productPerformance({ crossFilter });
   const { data, isLoading, error } = useSemanticModelQuery({ connection, query });
 
   const queryError = error?.message ?? (data?.status === "error" ? data.error.message : undefined);
@@ -86,7 +95,12 @@ export function ProductPerformanceGrid() {
     const dataTable = toDataTable(data.table, columnMetadata);
     body = (
       <div className="overflow-auto" style={{ maxHeight: 440 }}>
-        <DataGrid columns={GRID_COLUMNS} data={dataTable} theme={theme} />
+        <DataGrid
+          columns={GRID_COLUMNS}
+          data={dataTable}
+          theme={theme}
+          onInteraction={onInteraction}
+        />
       </div>
     );
   } else {

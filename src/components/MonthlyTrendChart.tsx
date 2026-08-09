@@ -1,7 +1,9 @@
 import { useState } from "react";
+import type { InteractionEvent } from "@microsoft/fabric-visuals-core";
 import { VegaVisual, useCssTheme } from "@microsoft/fabric-visuals";
 import { useSemanticModelQuery } from "@/hooks/use-semantic-model-query";
 import { toDataTable } from "@/lib/to-data-table";
+import type { CrossFilterParams } from "@/lib/cross-filter";
 import { monthlyTrend, type TrendMeasure } from "@/queries/dashboard/monthly-trend";
 import { productMonthlyTrend } from "@/queries/catalog/product-monthly-trend";
 import { Card } from "./Card";
@@ -14,6 +16,10 @@ interface MonthlyTrendChartProps {
   /** When set, the chart plots the monthly trend for this single product. */
   productId?: number;
   chartHeight?: number;
+  /** Active cross-filter selection from the dashboard page. */
+  crossFilter?: CrossFilterParams | null;
+  /** Called when the user clicks a data point or clears the selection. */
+  onInteraction?: (events: InteractionEvent[]) => void;
 }
 
 const TREND_LABELS = ["Revenue", "Units Sold"] as const;
@@ -26,7 +32,7 @@ const TREND_MEASURES: readonly TrendMeasure[] = ["Revenue", "Units"];
  * trend for a single watch when `productId` is provided. Query + spec come
  * from the factory functions in `src/queries`.
  */
-export function MonthlyTrendChart({ title, subtitle, productId, chartHeight = 300 }: MonthlyTrendChartProps) {
+export function MonthlyTrendChart({ title, subtitle, productId, chartHeight = 300, crossFilter, onInteraction }: MonthlyTrendChartProps) {
   const theme = useCssTheme();
   const [measureIndex, setMeasureIndex] = useState(0);
   const measure = TREND_MEASURES[measureIndex];
@@ -34,7 +40,7 @@ export function MonthlyTrendChart({ title, subtitle, productId, chartHeight = 30
   const { connection, query, columnMetadata, vegaLiteSpec } =
     productId != null
       ? productMonthlyTrend({ productId, measure })
-      : monthlyTrend({ measure });
+      : monthlyTrend({ measure, crossFilter });
 
   const { data, isLoading, error } = useSemanticModelQuery({ connection, query });
 
@@ -47,7 +53,15 @@ export function MonthlyTrendChart({ title, subtitle, productId, chartHeight = 30
     body = <ErrorBanner message={queryError} />;
   } else if (data?.status === "success" && data.table.rows.length > 0) {
     const dataTable = toDataTable(data.table, columnMetadata);
-    body = <VegaVisual spec={vegaLiteSpec} data={dataTable} theme={theme} style={{ height: chartHeight }} />;
+    body = (
+      <VegaVisual
+        spec={vegaLiteSpec}
+        data={dataTable}
+        theme={theme}
+        style={{ height: chartHeight }}
+        onInteraction={onInteraction}
+      />
+    );
   } else {
     body = <EmptyState message="No data available" />;
   }

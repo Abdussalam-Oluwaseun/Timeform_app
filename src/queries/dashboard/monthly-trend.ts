@@ -1,5 +1,7 @@
 import type { VisualizationSpec } from "@microsoft/fabric-visuals";
 import type { ColumnMetadataMap } from "@/lib/to-data-table";
+import type { CrossFilterParams } from "@/lib/cross-filter";
+import { applyCrossFilterToQuery } from "@/lib/cross-filter";
 import baseQuery from "./monthly-trend.dax?raw";
 import baseSpec from "./monthly-trend.json";
 
@@ -32,6 +34,8 @@ const MEASURE_META: Record<TrendMeasure, TrendMeasureMeta> = {
 export interface MonthlyTrendParams {
   /** Which measure to plot on the y-axis. Defaults to "Revenue". */
   measure?: TrendMeasure;
+  /** Active cross-filter selection from the dashboard page. */
+  crossFilter?: CrossFilterParams | null;
 }
 
 /**
@@ -93,10 +97,11 @@ export function withTrendMeasure(
  */
 export function monthlyTrend(params?: MonthlyTrendParams) {
   const measure = params?.measure ?? "Revenue";
+  const query = applyCrossFilterToQuery(baseQuery, params?.crossFilter ?? null);
   const vegaLiteSpec = withTrendMeasure(
     baseSpec as unknown as Record<string, unknown>,
     measure,
   ) as VisualizationSpec;
 
-  return { connection, query: baseQuery, columnMetadata, vegaLiteSpec };
+  return { connection, query, columnMetadata, vegaLiteSpec };
 }

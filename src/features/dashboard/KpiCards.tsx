@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useSemanticModelQuery } from "@/hooks/use-semantic-model-query";
+import type { CrossFilterParams } from "@/lib/cross-filter";
 import { monthlyTrend } from "@/queries/dashboard/monthly-trend";
 import { ErrorBanner, LoadingSkeleton } from "@/components/Feedback";
 
 interface KpiCardsProps {
   className?: string;
+  /** Active cross-filter selection from the dashboard page. */
+  crossFilter?: CrossFilterParams | null;
 }
 
 interface Kpi {
@@ -19,8 +22,8 @@ interface Kpi {
  * Totals are rolled up in TypeScript from the monthly trend rows (already
  * fetched for the trend chart — same query, SDK cache hit).
  */
-export function KpiCards({ className }: KpiCardsProps) {
-  const { connection, query } = monthlyTrend({ measure: "Revenue" });
+export function KpiCards({ className, crossFilter }: KpiCardsProps) {
+  const { connection, query } = monthlyTrend({ measure: "Revenue", crossFilter });
   const { data, isLoading, error } = useSemanticModelQuery({ connection, query });
 
   const queryError = error?.message ?? (data?.status === "error" ? data.error.message : undefined);
